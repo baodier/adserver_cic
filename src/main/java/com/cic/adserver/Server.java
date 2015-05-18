@@ -3,6 +3,8 @@ package com.cic.adserver;
 /**
  * Created by liuyq on 2015/5/17.
  */
+import com.cic.thrift.AdServerService;
+import com.cic.thrift.AdServerService.Processor;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TBinaryProtocol.Factory;
 import org.apache.thrift.server.TServer;
@@ -10,6 +12,8 @@ import org.apache.thrift.server.TThreadPoolServer;
 import org.apache.thrift.server.TThreadPoolServer.Args;
 import org.apache.thrift.transport.TServerSocket;
 import org.apache.thrift.transport.TTransportException;
+
+
 public class Server {
 
     public void startServer() {
