@@ -35,6 +35,7 @@ public class ad_ret implements org.apache.thrift.TBase<ad_ret, ad_ret._Fields>, 
   private static final org.apache.thrift.protocol.TField KEYWORD_FIELD_DESC = new org.apache.thrift.protocol.TField("keyword", org.apache.thrift.protocol.TType.STRING, (short)1);
   private static final org.apache.thrift.protocol.TField BID_FIELD_DESC = new org.apache.thrift.protocol.TField("bid", org.apache.thrift.protocol.TType.DOUBLE, (short)2);
   private static final org.apache.thrift.protocol.TField ADID_FIELD_DESC = new org.apache.thrift.protocol.TField("adid", org.apache.thrift.protocol.TType.I32, (short)3);
+  private static final org.apache.thrift.protocol.TField SIMILARITY_FIELD_DESC = new org.apache.thrift.protocol.TField("similarity", org.apache.thrift.protocol.TType.DOUBLE, (short)4);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -45,12 +46,14 @@ public class ad_ret implements org.apache.thrift.TBase<ad_ret, ad_ret._Fields>, 
   public String keyword; // required
   public double bid; // required
   public int adid; // required
+  public double similarity; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
     KEYWORD((short)1, "keyword"),
     BID((short)2, "bid"),
-    ADID((short)3, "adid");
+    ADID((short)3, "adid"),
+    SIMILARITY((short)4, "similarity");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -71,6 +74,8 @@ public class ad_ret implements org.apache.thrift.TBase<ad_ret, ad_ret._Fields>, 
           return BID;
         case 3: // ADID
           return ADID;
+        case 4: // SIMILARITY
+          return SIMILARITY;
         default:
           return null;
       }
@@ -113,6 +118,7 @@ public class ad_ret implements org.apache.thrift.TBase<ad_ret, ad_ret._Fields>, 
   // isset id assignments
   private static final int __BID_ISSET_ID = 0;
   private static final int __ADID_ISSET_ID = 1;
+  private static final int __SIMILARITY_ISSET_ID = 2;
   private byte __isset_bitfield = 0;
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
@@ -123,6 +129,8 @@ public class ad_ret implements org.apache.thrift.TBase<ad_ret, ad_ret._Fields>, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.DOUBLE)));
     tmpMap.put(_Fields.ADID, new org.apache.thrift.meta_data.FieldMetaData("adid", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
+    tmpMap.put(_Fields.SIMILARITY, new org.apache.thrift.meta_data.FieldMetaData("similarity", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.DOUBLE)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(ad_ret.class, metaDataMap);
   }
@@ -133,7 +141,8 @@ public class ad_ret implements org.apache.thrift.TBase<ad_ret, ad_ret._Fields>, 
   public ad_ret(
     String keyword,
     double bid,
-    int adid)
+    int adid,
+    double similarity)
   {
     this();
     this.keyword = keyword;
@@ -141,6 +150,8 @@ public class ad_ret implements org.apache.thrift.TBase<ad_ret, ad_ret._Fields>, 
     setBidIsSet(true);
     this.adid = adid;
     setAdidIsSet(true);
+    this.similarity = similarity;
+    setSimilarityIsSet(true);
   }
 
   /**
@@ -153,6 +164,7 @@ public class ad_ret implements org.apache.thrift.TBase<ad_ret, ad_ret._Fields>, 
     }
     this.bid = other.bid;
     this.adid = other.adid;
+    this.similarity = other.similarity;
   }
 
   public ad_ret deepCopy() {
@@ -166,6 +178,8 @@ public class ad_ret implements org.apache.thrift.TBase<ad_ret, ad_ret._Fields>, 
     this.bid = 0.0;
     setAdidIsSet(false);
     this.adid = 0;
+    setSimilarityIsSet(false);
+    this.similarity = 0.0;
   }
 
   public String getKeyword() {
@@ -238,6 +252,29 @@ public class ad_ret implements org.apache.thrift.TBase<ad_ret, ad_ret._Fields>, 
     __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __ADID_ISSET_ID, value);
   }
 
+  public double getSimilarity() {
+    return this.similarity;
+  }
+
+  public ad_ret setSimilarity(double similarity) {
+    this.similarity = similarity;
+    setSimilarityIsSet(true);
+    return this;
+  }
+
+  public void unsetSimilarity() {
+    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __SIMILARITY_ISSET_ID);
+  }
+
+  /** Returns true if field similarity is set (has been assigned a value) and false otherwise */
+  public boolean isSetSimilarity() {
+    return EncodingUtils.testBit(__isset_bitfield, __SIMILARITY_ISSET_ID);
+  }
+
+  public void setSimilarityIsSet(boolean value) {
+    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __SIMILARITY_ISSET_ID, value);
+  }
+
   public void setFieldValue(_Fields field, Object value) {
     switch (field) {
     case KEYWORD:
@@ -264,6 +301,14 @@ public class ad_ret implements org.apache.thrift.TBase<ad_ret, ad_ret._Fields>, 
       }
       break;
 
+    case SIMILARITY:
+      if (value == null) {
+        unsetSimilarity();
+      } else {
+        setSimilarity((Double)value);
+      }
+      break;
+
     }
   }
 
@@ -277,6 +322,9 @@ public class ad_ret implements org.apache.thrift.TBase<ad_ret, ad_ret._Fields>, 
 
     case ADID:
       return Integer.valueOf(getAdid());
+
+    case SIMILARITY:
+      return Double.valueOf(getSimilarity());
 
     }
     throw new IllegalStateException();
@@ -295,6 +343,8 @@ public class ad_ret implements org.apache.thrift.TBase<ad_ret, ad_ret._Fields>, 
       return isSetBid();
     case ADID:
       return isSetAdid();
+    case SIMILARITY:
+      return isSetSimilarity();
     }
     throw new IllegalStateException();
   }
@@ -336,6 +386,15 @@ public class ad_ret implements org.apache.thrift.TBase<ad_ret, ad_ret._Fields>, 
       if (!(this_present_adid && that_present_adid))
         return false;
       if (this.adid != that.adid)
+        return false;
+    }
+
+    boolean this_present_similarity = true;
+    boolean that_present_similarity = true;
+    if (this_present_similarity || that_present_similarity) {
+      if (!(this_present_similarity && that_present_similarity))
+        return false;
+      if (this.similarity != that.similarity)
         return false;
     }
 
@@ -385,6 +444,16 @@ public class ad_ret implements org.apache.thrift.TBase<ad_ret, ad_ret._Fields>, 
         return lastComparison;
       }
     }
+    lastComparison = Boolean.valueOf(isSetSimilarity()).compareTo(typedOther.isSetSimilarity());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetSimilarity()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.similarity, typedOther.similarity);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -419,6 +488,10 @@ public class ad_ret implements org.apache.thrift.TBase<ad_ret, ad_ret._Fields>, 
     if (!first) sb.append(", ");
     sb.append("adid:");
     sb.append(this.adid);
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("similarity:");
+    sb.append(this.similarity);
     first = false;
     sb.append(")");
     return sb.toString();
@@ -489,6 +562,14 @@ public class ad_ret implements org.apache.thrift.TBase<ad_ret, ad_ret._Fields>, 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 4: // SIMILARITY
+            if (schemeField.type == org.apache.thrift.protocol.TType.DOUBLE) {
+              struct.similarity = iprot.readDouble();
+              struct.setSimilarityIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -514,6 +595,9 @@ public class ad_ret implements org.apache.thrift.TBase<ad_ret, ad_ret._Fields>, 
       oprot.writeFieldEnd();
       oprot.writeFieldBegin(ADID_FIELD_DESC);
       oprot.writeI32(struct.adid);
+      oprot.writeFieldEnd();
+      oprot.writeFieldBegin(SIMILARITY_FIELD_DESC);
+      oprot.writeDouble(struct.similarity);
       oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
@@ -542,7 +626,10 @@ public class ad_ret implements org.apache.thrift.TBase<ad_ret, ad_ret._Fields>, 
       if (struct.isSetAdid()) {
         optionals.set(2);
       }
-      oprot.writeBitSet(optionals, 3);
+      if (struct.isSetSimilarity()) {
+        optionals.set(3);
+      }
+      oprot.writeBitSet(optionals, 4);
       if (struct.isSetKeyword()) {
         oprot.writeString(struct.keyword);
       }
@@ -552,12 +639,15 @@ public class ad_ret implements org.apache.thrift.TBase<ad_ret, ad_ret._Fields>, 
       if (struct.isSetAdid()) {
         oprot.writeI32(struct.adid);
       }
+      if (struct.isSetSimilarity()) {
+        oprot.writeDouble(struct.similarity);
+      }
     }
 
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, ad_ret struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
-      BitSet incoming = iprot.readBitSet(3);
+      BitSet incoming = iprot.readBitSet(4);
       if (incoming.get(0)) {
         struct.keyword = iprot.readString();
         struct.setKeywordIsSet(true);
@@ -569,6 +659,10 @@ public class ad_ret implements org.apache.thrift.TBase<ad_ret, ad_ret._Fields>, 
       if (incoming.get(2)) {
         struct.adid = iprot.readI32();
         struct.setAdidIsSet(true);
+      }
+      if (incoming.get(3)) {
+        struct.similarity = iprot.readDouble();
+        struct.setSimilarityIsSet(true);
       }
     }
   }
