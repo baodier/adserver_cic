@@ -5,11 +5,6 @@ struct ad_info {
     4: string searchWord
 }
 
-struct ad_ret {
-    1: string keyword,
-    2: double bid,
-    3: i32 adid
-}
 service AdServerService{
-list<ad_ret> ask4Ads(1:ad_info info)
+list<String> ask4Ads(1:ad_info info)
 }

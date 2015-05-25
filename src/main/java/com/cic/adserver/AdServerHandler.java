@@ -9,7 +9,6 @@ import com.cic.thrift.ad_info;
 import com.cic.thrift.ad_ret;
 import com.cic.utils.AdComparator;
 import com.cic.utils.Similarity;
-import com.sun.naming.internal.FactoryEnumeration;
 
 import javax.sql.rowset.JdbcRowSet;
 import java.sql.SQLException;
@@ -24,11 +23,12 @@ public class AdServerHandler implements Iface {
     static final public String SEG_KEYWORD_BID = ":";
     static final public double BIAS = 1.0;
 
-    static public void pr(String str) {
-        System.out.println(str);
-    }
 
-    public List<ad_ret> ask4Ads(ad_info info) throws org.apache.thrift.TException {
+    //static public void pr(String str) {
+     //   System.out.println(str);
+    //}
+
+    public List<String> ask4Ads(ad_info info) throws org.apache.thrift.TException {
         System.out.println("---- new query ----");
         String searchWords = info.getSearchWord();
         System.out.println("search word is : " + searchWords);
@@ -38,7 +38,7 @@ public class AdServerHandler implements Iface {
         ArrayList<String> candidates = adIndex(category);
         System.out.println("candidate len : " + String.valueOf(candidates.size()));
 
-        List<ad_ret> results = adRank(candidates, searchWords);
+        List<String> results = adRank(candidates, searchWords);
         System.out.println("ranking len : " + String.valueOf(candidates.size()));
        // for (ad_ret item : results){
         //    System.out.println("ranking item : " + item.getAdid()+"\t"+item.getBid()+"\t"+item.getKeyword());
@@ -64,11 +64,11 @@ public class AdServerHandler implements Iface {
         return candidates;
     }
 
-    public List<ad_ret> adRank(ArrayList<String> candidates, String searchword) {
+    public List<String> adRank(ArrayList<String> candidates, String searchword) {
         List<ad_ret> results = new ArrayList<ad_ret>();
-        for (String item : candidates) {
-            pr(item.toString());
-        }
+        //for (String item : candidates) {
+        //    pr(item.toString());
+        //}
 
         double bias4Cat = 1.0;
         Similarity simlarity = new Similarity();
@@ -93,7 +93,7 @@ public class AdServerHandler implements Iface {
 
                 double sim = simlarity.calsim(searchword, kb[0]);
                 double ecpm = (BIAS + sim +bias4Cat) * Double.valueOf(kb[1]);
-                pr(searchword+"\t"+kb[0]+"\t"+sim+"\t"+ecpm);
+                //pr(searchword+"\t"+kb[0]+"\t"+sim+"\t"+ecpm);
                 if (ecpm > max_ecpm) {
                     max_ecpm = ecpm;
                     matchword = kb[0];
@@ -112,10 +112,15 @@ public class AdServerHandler implements Iface {
         if (results.size() >= MAX_NUM)
             results = results.subList(0, 4);
 
+        //for (ad_ret ad : results) {
+        //    pr(ad.toString());
+        //}
+
+        ArrayList<String> ret = new ArrayList<String>();
         for (ad_ret ad : results) {
-            pr(ad.toString());
+            ret.add(ad.getAdid()+"\t"+ad.getBid()+"\t"+ad.getKeyword());
         }
-        return results;
+        return ret;
     }
 
 
@@ -128,11 +133,11 @@ public class AdServerHandler implements Iface {
             JdbcRowSet jdbcRs = jdbcConn.jdbcRs;
             String sql;
             if (!include) {
-                sql = "select id, ggjh_id, bt, gjzcj from ggdy where tfzt=1 and sslm!=\"" + category +"\"";
+                sql = "select id, ggjh_id, bt, gjzcj from ggdy where tfzt=2 and tgdxlx=1 and sslm!=\"" + category +"\"";
             } else {
-                sql = "select id, ggjh_id, bt, gjzcj from ggdy where tfzt=1 and sslm=\"" + category+"\"";
+                sql = "select id, ggjh_id, bt, gjzcj from ggdy where tfzt=2 and tgdxlx=1 and sslm=\"" + category+"\"";
             }
-            pr(sql);
+            //pr(sql);
             jdbcRs.setCommand(sql);
             jdbcRs.execute();
             jdbcRs.beforeFirst();

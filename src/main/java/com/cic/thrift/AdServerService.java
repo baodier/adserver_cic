@@ -33,7 +33,7 @@ public class AdServerService {
 
   public interface Iface {
 
-    public List<ad_ret> ask4Ads(ad_info info) throws org.apache.thrift.TException;
+    public List<String> ask4Ads(ad_info info) throws org.apache.thrift.TException;
 
   }
 
@@ -63,7 +63,7 @@ public class AdServerService {
       super(iprot, oprot);
     }
 
-    public List<ad_ret> ask4Ads(ad_info info) throws org.apache.thrift.TException
+    public List<String> ask4Ads(ad_info info) throws org.apache.thrift.TException
     {
       send_ask4Ads(info);
       return recv_ask4Ads();
@@ -76,7 +76,7 @@ public class AdServerService {
       sendBase("ask4Ads", args);
     }
 
-    public List<ad_ret> recv_ask4Ads() throws org.apache.thrift.TException
+    public List<String> recv_ask4Ads() throws org.apache.thrift.TException
     {
       ask4Ads_result result = new ask4Ads_result();
       receiveBase(result, "ask4Ads");
@@ -126,7 +126,7 @@ public class AdServerService {
         prot.writeMessageEnd();
       }
 
-      public List<ad_ret> getResult() throws org.apache.thrift.TException {
+      public List<String> getResult() throws org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
@@ -545,7 +545,7 @@ public class AdServerService {
       schemes.put(TupleScheme.class, new ask4Ads_resultTupleSchemeFactory());
     }
 
-    public List<ad_ret> success; // required
+    public List<String> success; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -611,7 +611,7 @@ public class AdServerService {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
-              new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, ad_ret.class))));
+              new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING))));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(ask4Ads_result.class, metaDataMap);
     }
@@ -620,7 +620,7 @@ public class AdServerService {
     }
 
     public ask4Ads_result(
-      List<ad_ret> success)
+      List<String> success)
     {
       this();
       this.success = success;
@@ -631,9 +631,9 @@ public class AdServerService {
      */
     public ask4Ads_result(ask4Ads_result other) {
       if (other.isSetSuccess()) {
-        List<ad_ret> __this__success = new ArrayList<ad_ret>();
-        for (ad_ret other_element : other.success) {
-          __this__success.add(new ad_ret(other_element));
+        List<String> __this__success = new ArrayList<String>();
+        for (String other_element : other.success) {
+          __this__success.add(other_element);
         }
         this.success = __this__success;
       }
@@ -652,22 +652,22 @@ public class AdServerService {
       return (this.success == null) ? 0 : this.success.size();
     }
 
-    public java.util.Iterator<ad_ret> getSuccessIterator() {
+    public java.util.Iterator<String> getSuccessIterator() {
       return (this.success == null) ? null : this.success.iterator();
     }
 
-    public void addToSuccess(ad_ret elem) {
+    public void addToSuccess(String elem) {
       if (this.success == null) {
-        this.success = new ArrayList<ad_ret>();
+        this.success = new ArrayList<String>();
       }
       this.success.add(elem);
     }
 
-    public List<ad_ret> getSuccess() {
+    public List<String> getSuccess() {
       return this.success;
     }
 
-    public ask4Ads_result setSuccess(List<ad_ret> success) {
+    public ask4Ads_result setSuccess(List<String> success) {
       this.success = success;
       return this;
     }
@@ -693,7 +693,7 @@ public class AdServerService {
         if (value == null) {
           unsetSuccess();
         } else {
-          setSuccess((List<ad_ret>)value);
+          setSuccess((List<String>)value);
         }
         break;
 
@@ -844,12 +844,11 @@ public class AdServerService {
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
                   org.apache.thrift.protocol.TList _list0 = iprot.readListBegin();
-                  struct.success = new ArrayList<ad_ret>(_list0.size);
+                  struct.success = new ArrayList<String>(_list0.size);
                   for (int _i1 = 0; _i1 < _list0.size; ++_i1)
                   {
-                    ad_ret _elem2; // required
-                    _elem2 = new ad_ret();
-                    _elem2.read(iprot);
+                    String _elem2; // required
+                    _elem2 = iprot.readString();
                     struct.success.add(_elem2);
                   }
                   iprot.readListEnd();
@@ -877,10 +876,10 @@ public class AdServerService {
         if (struct.success != null) {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
-            oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (ad_ret _iter3 : struct.success)
+            oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.success.size()));
+            for (String _iter3 : struct.success)
             {
-              _iter3.write(oprot);
+              oprot.writeString(_iter3);
             }
             oprot.writeListEnd();
           }
@@ -911,9 +910,9 @@ public class AdServerService {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (ad_ret _iter4 : struct.success)
+            for (String _iter4 : struct.success)
             {
-              _iter4.write(oprot);
+              oprot.writeString(_iter4);
             }
           }
         }
@@ -925,13 +924,12 @@ public class AdServerService {
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list5 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new ArrayList<ad_ret>(_list5.size);
+            org.apache.thrift.protocol.TList _list5 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+            struct.success = new ArrayList<String>(_list5.size);
             for (int _i6 = 0; _i6 < _list5.size; ++_i6)
             {
-              ad_ret _elem7; // required
-              _elem7 = new ad_ret();
-              _elem7.read(iprot);
+              String _elem7; // required
+              _elem7 = iprot.readString();
               struct.success.add(_elem7);
             }
           }
