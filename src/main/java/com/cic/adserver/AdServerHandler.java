@@ -133,7 +133,7 @@ public class AdServerHandler implements Iface {
             JdbcRowSet jdbcRs = jdbcConn.jdbcRs;
             String sql;
             if (!include) {
-                sql = "select id, ggjh_id, bt, gjzcj from ggdy where tfzt=2 and tgdxlx=1 and sslm!=\"" + category +"\"";
+                sql = "select id, ggjh_id, bt, gjzcj from ggdy where tfzt=2 and tgdxlx=1 and (sslm is null or sslm!=\"" + category +"\")";
             } else {
                 sql = "select id, ggjh_id, bt, gjzcj from ggdy where tfzt=2 and tgdxlx=1 and sslm=\"" + category+"\"";
             }
@@ -168,7 +168,8 @@ public class AdServerHandler implements Iface {
         info.setCategory("手机");
         info.setSearchWord("小米");
         try {
-            handler.ask4Ads(info);
+            List<String> lst = handler.ask4Ads(info);
+            System.out.println(lst);
         } catch (Exception e) {
             e.printStackTrace();
         }
